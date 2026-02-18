@@ -9,136 +9,135 @@
     },
     "favicon": "/logo/fonio-logo.png",
     "navigation": {
-        "tabs": [
+      "global": {
+        "anchors": [
+          {
+            "anchor": "fonio.ai",
+            "icon": "phone",
+            "href": "https://www.fonio.ai/"
+          },
+          {
+            "anchor": "fonio Plattform",
+            "icon": "phone",
+            "href": "https://app.fonio.ai/"
+          },
+          {
+            "anchor": "Blog",
+            "icon": "newspaper",
+            "href": "https://www.fonio.ai/blog-tags/blog-article"
+          }
+        ]
+      },
+      "tabs": [
+        {
+          "tab": "Help Center",
+          "groups": [
             {
-                "tab": "Help Center",
-                "groups": [
-                    {
-                        "group": "Erste Schritte",
-                        "pages": [
-                            "Introduction/Introduction",
-                            "Introduction/fonio-Quickstart"
-                        ]
-                    },
-                    {
-                        "group": "Verhalten",
-                        "pages": [
-                            "Verhalten/Verhalten",
-                            "Verhalten/SpracheStimme",
-                            "Verhalten/Startnachricht",
-                            "Verhalten/Prompt",
-                            "Verhalten/Wissensdatenbank"
-                        ]
-                    },
-                    {
-                        "group": "Technisches",
-                        "pages": [
-                            "Technisches/AnrufEinstellungen",
-                            "Technisches/Audio",
-                            "Technisches/Funktionen",
-                            "Technisches/Aufzeichnung",
-                            "Technisches/VariablenExtraktion",
-                            "Technisches/InboundWebhook"
-                        ]
-                    },
-                    {
-                        "group": "Tools",
-                        "pages": [
-                            "Tools/AnrufWeiterleitung",
-                            "Tools/Terminbuchung",
-                            "Tools/Suchanfrage",
-                            "Tools/APIRequest"
-                        ]
-                    },
-                    {
-                        "group": "Nachverarbeitung",
-                        "pages": [
-                            "Nachverarbeitung/EmailVersenden",
-                            "Nachverarbeitung/SMSVersenden",
-                            "Nachverarbeitung/APIRequest"
-                        ]
-                    },
-                    {
-                        "group": "Telefonnummern",
-                        "pages": [
-                            "Telefonnummern/Telefonnummern",
-                            "Telefonnummern/fonioTelefonnummern",
-                            "Telefonnummern/IndividuelleTelefonnummern"
-                        ]
-                    },
-                    {
-                        "group": "SIP Telefonnummern",
-                        "pages": [
-                            "SIP-Telefonnummern/uebersicht",
-                            "SIP-Telefonnummern/3CX",
-                            "SIP-Telefonnummern/Starface",
-                            "SIP-Telefonnummern/Fritzbox",
-                            "SIP-Telefonnummern/Easybell",
-                            "SIP-Telefonnummern/Zadarma",
-                            "SIP-Telefonnummern/Twilio",
-                            "SIP-Telefonnummern/Telnyx",
-                            "SIP-Telefonnummern/Placetel",
-                            "SIP-Telefonnummern/Peoplefon",
-                            "SIP-Telefonnummern/NFON",
-                            "SIP-Telefonnummern/Fonial",
-                            "SIP-Telefonnummern/Sipgate",
-                            "SIP-Telefonnummern/andere-anbieter"
-                        ]
-                    },
-                    {
-                        "group": "Beispiel-Prompts",
-                        "pages": [
-                            "Beispiele/Anrufbeantworter",
-                            "Beispiele/Empfangsperson",
-                            "Beispiele/Terminbuchung",
-                            "Beispiele/FirstLevelSupport"
-                        ]
-                    },
-
-                  {
-                        "group": "Sonstiges",
-                        "pages": [
-                            "Sonstiges/Rufweiterleitung-einrichten",
-                            "Sonstiges/Comdesk"
-                        ]
-                    },
-                  
-                    {
-                        "group": "Häufig gestellte Fragen",
-                        "pages": [
-                            "FAQ/FAQ"
-                        ]
-                    },
-                    {
-                        "group": "Datenschutz, AGBs & AVV",
-                        "pages": [
-                            "Datenschutz/Datenschutz",
-                            "Datenschutz/fonioAGB",
-                            "Datenschutz/AVV"
-                        ]
-                    }
-                ]
+              "group": "Erste Schritte",
+              "pages": [
+                "Introduction/Introduction",
+                "Introduction/fonio-Quickstart"
+              ]
+            },
+            {
+              "group": "Verhalten",
+              "pages": [
+                "Verhalten/Verhalten",
+                "Verhalten/SpracheStimme",
+                "Verhalten/Startnachricht",
+                "Verhalten/Prompt",
+                "Verhalten/Wissensdatenbank"
+              ]
+            },
+            {
+              "group": "Technisches",
+              "pages": [
+                "Technisches/AnrufEinstellungen",
+                "Technisches/Audio",
+                "Technisches/Funktionen",
+                "Technisches/Aufzeichnung",
+                "Technisches/VariablenExtraktion",
+                "Technisches/InboundWebhook"
+              ]
+            },
+            {
+              "group": "Tools",
+              "pages": [
+                "Tools/AnrufWeiterleitung",
+                "Tools/Terminbuchung",
+                "Tools/Suchanfrage",
+                "Tools/APIRequest"
+              ]
+            },
+            {
+              "group": "Nachverarbeitung",
+              "pages": [
+                "Nachverarbeitung/EmailVersenden",
+                "Nachverarbeitung/SMSVersenden",
+                "Nachverarbeitung/APIRequest"
+              ]
+            },
+            {
+              "group": "Telefonnummern",
+              "pages": [
+                "Telefonnummern/Telefonnummern",
+                "Telefonnummern/fonioTelefonnummern",
+                "Telefonnummern/IndividuelleTelefonnummern"
+              ]
+            },
+            {
+              "group": "SIP Telefonnummern",
+              "pages": [
+                "SIP-Telefonnummern/uebersicht",
+                "SIP-Telefonnummern/3CX",
+                "SIP-Telefonnummern/Starface",
+                "SIP-Telefonnummern/Fritzbox",
+                "SIP-Telefonnummern/3CX-copied-1",
+                "SIP-Telefonnummern/Easybell",
+                "SIP-Telefonnummern/Zadarma",
+                "SIP-Telefonnummern/Twilio",
+                "SIP-Telefonnummern/Telnyx",
+                "SIP-Telefonnummern/Placetel",
+                "SIP-Telefonnummern/Peoplefon",
+                "SIP-Telefonnummern/NFON",
+                "SIP-Telefonnummern/Fonial",
+                "SIP-Telefonnummern/Sipgate",
+                "SIP-Telefonnummern/andere-anbieter"
+              ]
+            },
+            {
+              "group": "Beispiel-Prompts",
+              "pages": [
+                "Beispiele/Anrufbeantworter",
+                "Beispiele/Empfangsperson",
+                "Beispiele/Terminbuchung",
+                "Beispiele/FirstLevelSupport"
+              ]
+            },
+            {
+              "group": "Sonstiges",
+              "pages": [
+                "Sonstiges/Rufweiterleitung-einrichten",
+                "Sonstiges/Comdesk"
+              ]
+            },
+            {
+              "group": "Häufig gestellte Fragen",
+              "pages": [
+                "FAQ/FAQ"
+              ]
+            },
+            {
+              "group": "Datenschutz, AGBs & AVV",
+              "pages": [
+                "Datenschutz/Datenschutz",
+                "Datenschutz/fonioAGB",
+                "Datenschutz/AVV"
+              ]
             }
-        ],
-        "global": {
-            "anchors": [
-                {
-                    "anchor": "fonio.ai",
-                    "href": "https://www.fonio.ai/",
-                    "icon": "phone"
-                },
-                {
-                    "anchor": "fonio Plattform",
-                    "href": "https://app.fonio.ai/",
-                    "icon": "phone"
-                },
-                {
-                    "anchor": "Blog",
-                    "href": "https://www.fonio.ai/blog-tags/blog-article",
-                    "icon": "newspaper"
-                }
-            ]
+          ]
         }
+      ]
     },
     "logo": {
         "light": "/logo/fonio-logo.png",

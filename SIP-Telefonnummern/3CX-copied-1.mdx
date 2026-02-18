@@ -1,0 +1,123 @@
+---
+title: "Phonestar*"
+description: "Wie du deine Phonestar* Anlage mit Fonio verbindest"
+---
+
+Der phonestar\* SIP Trunk ist mit dem KI-Telefonassistent von [Fonio.ai](http://Fonio.ai) kompatibel. Für die Verwendung von [Fonio.ai](http://Fonio.ai) benötigen Sie zwei phonestar\* SIP Trunks, also ein SIP Trunk für eingehende Telefonie und einen für ausgehende Telefonie, mit einer Telefonnummer. Das Telefonie Produkt PhoneBasic hat keine Grundgebühr und zudem ist eine Schweizer Telefonnummer sowie die zwei SIP Trunks kostenlos.
+
+Hersteller: [Fonio.ai](http://Fonio.ai)
+
+Homepage: https://www.fonio.ai/de
+
+### **Inhaltsverzeichnis**
+
+1. Voraussetzung für die Nutzung des KI-Telefonassistenten von [Fonio.ai](http://Fonio.ai)
+
+2. [Fonio.ai](http://Fonio.ai) mit phonestar\* SIP Trunk für eingehende Telefonie einrichten
+
+3. [Fonio.ai](http://Fonio.ai) mit phonestar\* SIP Trunk für ausgehende Telefonie einrichten
+
+\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
+
+### **1. Voraussetzung für die Nutzung des KI-Telefonassistenten von **[**Fonio.ai**](http://Fonio.ai)
+
+Die Voraussetzung, um [Fonio.ai](http://Fonio.ai) nutzen zu können, ist ein **phonestar\* Konto **mit Telefonie Produkt PhoneBasic oder PhonePro. Das Telefonie Produkt PhoneBasic hat keine Grundgebühr und zudem ist eine Telefonnummer sowie die zwei SIP Trunks kostenlos.
+
+Link Anmeldung PhoneBasic: https://www.phonestar.ch/bestellen/
+
+Link Anmeldung kostenloses und unverbindliches Testangebot: https://www.phonestar.ch/telefonie/testangebot/
+
+### **2. **[**Fonio.ai**](http://Fonio.ai)** mit phonestar\* SIP Trunk für eingehende Telefonie einrichten**
+
+2.1 Loggen Sie sich bei [**Fonio.ai**](http://Fonio.ai) ein. Klicken Sie im Menü links auf **Telefonnummern (1)** und danach auf **Nummer hinzufügen (2) **→ **SIP Nummer erstellen (3)**. Lassen Sie das neue Fenster offen und erstellen Sie wie unter Punkt 2 und 3 beschrieben die zwei phonestar\* SIP Trunks. Unter Punkt 4 wird beschrieben wo Sie die Daten der phonestar\* SIP Trunks bei [Fonio.ai](http://Fonio.ai) und wo die Daten von [Fonio.ai](http://Fonio.ai) im phonestar\* SIP Trunk eintragen werden müssen.
+
+<Frame>
+  ![Image1](/images/image1.png)
+</Frame>
+
+2.2 Loggen Sie sich in Ihr  phonestar\* Konto ein. Klicken Sie im Menü links auf **SIP Trunk (1) **und danach können Sie mit einem Klick auf den Button **NEUER TRUNK (2) **einen SIP Trunk erstellen. 
+
+<Frame>
+  ![Image2](/images/image2.png)
+</Frame>
+
+2.3 Wählen Sie die **Trunk Hauptnummer (1)**, welche Sie mit Fonio ai. nutzen möchten, aus. Unter **Zuteilung (2)** sehen Sie die verfügbaren Nummern, welche mit einem Klick auf die Telefonnummer auf die rechte Seite, ausgewählt, wechseln und somit über den SIP Trunk verwendet werden können. **Es muss mindestens eine Telefonnummer ausgewählt sein.** Erstellen Sie den SIP Trunk über den Button **BESTELLEN (3)**.
+
+<Frame>
+  ![Image3](/images/image3.png)
+</Frame>
+
+[Weitere Informationen zum phonestar\* SIP Trunk](https://support.phonestar.ch/#knowledge_base/1/locale/de-de/answer/64/edit)
+
+2.4 Tragen Sie die Trunk Hauptnummer bei [Fonio.ai](http://Fonio.ai) (Punkt 2.1) unter **Nummer / Name** im internationalen Format, also mit +4181589xxxx, ein.
+
+<img
+  src="/images/image4.png"
+  alt="Image4"
+  title="Image4"
+  style={{ width:"45%" }}
+/>
+
+2.5 Mit einem Klick auf _keine _unter **Beschreibung (1)** können Sie dem SIP Trunk den Name [_Fonio.ai_](http://Fonio.ai)_ eingehende Anrufe _geben. Danach können Sie mit einem Klick auf das User Symbol (2) die Konfiguration des SIP Trunks vornehmen.
+
+<Frame>
+  ![Image5](/images/image5.png)
+</Frame>
+
+2.6 Im neuen Fenster müssen Sie nun auf **IP Auth **wechseln. Bestätigen Sie die Änderung mit dem Button **ÄNDERN**. Danach klicken Sie unter **Eingehende Ziel Adresse** auf den Button **IP HINZUFÜGEN** und im neuen Fenster geben Sie unter **Adresse (1)** aus dem [Fonio.ai](http://Fonio.ai) Portal unter **Organisation (1)**, also in unserem Beispiel [vojhwtf1hn6.eu.sip.livekit.cloud](http://vojhwtf1hn6.eu.sip.livekit.cloud) (WICHTIG: ohne **SIP:**) und unter **Transsport (2) **wechseln Sie auf **TCP **und bestätigen Sie die Eingabe mit dem Button **HINZUFÜGEN (3)**.
+
+<Frame>
+  ![Image6](/images/image6.png)
+</Frame>
+
+2.7 Unter **Eingehende Ziel-Domäne (1)** tragen Sie die Domäne aus dem [Fonio.ai](http://Fonio.ai) Portal unter **Organisation (1)**, also in unserem Beispiel [vojhwtf1hn6.eu.sip.livekit.cloud](http://vojhwtf1hn6.eu.sip.livekit.cloud) (WICHTIG: ohne **SIP:**) ein. Zudem müssen **ausg. Anrufe** auf **Aus** und eingehend **SRTP **→ **ausgeschaltet** sein.
+
+<Frame>
+  ![Image7](/images/image7.png)
+</Frame>
+
+2.8 Die Einrichtung des phonestar\* SIP Trunks ist nun abgeschlossen. Wechseln Sie wieder auf das Kundenportal von [Fonio.ai](http://Fonio.ai) und schliessen Sie die **SIP Nummer erstellen** mit einem Klick auf den Button **SIP Nummer erstellen** unten rechts ab. Im [Fonio.ai](http://Fonio.ai) Kundenportal wird die SIP Nummer nun angezeigt.
+
+<Frame>
+  ![Image8](/images/image8.png)
+</Frame>
+
+2.9 Wechseln Sie nun im [Fonio.ai](http://Fonio.ai) Kundenportal über das Menü auf **Assistenten (1) **und klicken Sie danach auf den Button **Assistent erstellen (2)**. Im neuen Fenster **Assistent erstellen** können Sie nun einen individuellen Name geben wie z.B. Kundendienst. 
+
+<Frame>
+  ![Image9](/images/image9.png)
+</Frame>
+
+2.10 Klicken Sie nun beim erstellten Assistent oben rechts auf den Button **\+ Nummer zuweisen. **Im neuen Fenster wählen Sie unter **Verfügbare eingehende Nummern (1) **und **Verfügbare ausgehende Nummer (2) **die unter Punk 2.5 erstellte SIP Nummer, also in unserem Beispiel +4181589xxxx, aus. Schliessen Sie die Einrichtung mit einem Klich auf den Button **Nummer zuweisen** (3) und rechts ab.
+
+<Frame>
+  ![Image10](/images/image10.png)
+</Frame>
+
+2.11 Im [Fonio.ai](http://Fonio.ai) Kundenportal wird nun über das Menü Telefonnummer der Assistent mit Bezeichnung Kundendienst Punkt. 2.6 angezeigt.
+
+<Frame>
+  ![Image11](/images/image11.png)
+</Frame>
+
+2.12 Die Einrichtung des phonestar\* SIP Trunks für eingehende Anrufe bei [Fonio.ai](http://Fonio.ai) ist abgeschlossen. Sie können nun gemäss [Fonio.ai](http://Fonio.ai) den Assistenten nach Ihren Wünschen einrichten.
+
+Sie können nun den KI-Telefonassistent von [Fonio.ai](http://Fonio.ai) für eingehende Telefonie mit phonestar\* nutzen. Wir wünschen Ihnen viel Erfolg!
+
+### **3. **[**Fonio.ai**](http://Fonio.ai)** mit phonestar\* SIP Trunk für ausgehende Telefonie einrichten**
+
+3.1 Erstellen Sie in Ihrem phonestar\* Konto gemäss Punkt 2.2 über das Menü links → **SIP Trunk **→ mit einem Klick auf den Button **NEUER TRUNK **den zweiten SIP Trunk für ausgehende Anrufe.**Die Trunk Hauptnummer muss die gleiche gemäss Punkt 2.3 sein und es muss  <u>keine Telefonnummer</u> ausgewählt sein.** Fügen Sie dem zweiten SIP Trunk die **Beschreibung (1)** [_Fonio.ai_](http://Fonio.ai)_ ausgehende Anrufe _zu und klicken Sie danach auf das User Symbol  **(2) **um die Konfiguration des SIP Trunks vorzunehmen.
+
+<Frame>
+  ![Image12](/images/image12.png)
+</Frame>
+
+3.2 Die **Konfigurationsdaten (1) **des phonestar\* SIP Trunks, also VoIP Benutzername, VoIP Passwort und VoIP Server, können danach im [Fonio.ai](http://Fonio.ai) Kundekonto über das **Menü **→ **Telefonnummern** im erstellten Assistent über das Symbol **... **→ **SIP Nummer bearbeiten **unter **Optional: Ausgehende Anrufe **→ **Termination URL (1)**, wie auf dem Bild unten, eingetragen und mit dem Button **Änderung speichern (2)** integriert werden.
+
+<Frame>
+  ![Image13](/images/image13.png)
+</Frame>
+
+3.3 Die ausgehende Telefonie bei [Fonio.ai](http://Fonio.ai) ist nun abgeschlossen.
+
+Sie können nun den KI-Telefonassistent von [Fonio.ai](http://Fonio.ai) für ein- und ausgehende Telefonie mit phonestar\* nutzen. Wir wünschen Ihnen viel Erfolg!
