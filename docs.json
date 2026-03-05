@@ -100,10 +100,10 @@
                 "SIP-Telefonnummern/Placetel",
                 "SIP-Telefonnummern/Peoplefon",
                 "SIP-Telefonnummern/NFON",
+                "SIP-Telefonnummern/peoplephone",
                 "SIP-Telefonnummern/Fonial",
                 "SIP-Telefonnummern/Sipgate",
-                "SIP-Telefonnummern/andere-anbieter",
-                "SIP-Telefonnummern/peoplephone"
+                "SIP-Telefonnummern/andere-anbieter"
               ]
             },
             {
