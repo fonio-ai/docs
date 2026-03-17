@@ -67,12 +67,7 @@
                 "Tools/Terminbuchung",
                 "Tools/Suchanfrage",
                 "Tools/APIRequest",
-                {
-                  "group": "Terminbuchung",
-                  "pages": [
-                    "calendly"
-                  ]
-                }
+                "calendly"
               ]
             },
             {
