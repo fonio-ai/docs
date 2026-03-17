@@ -1,0 +1,57 @@
+---
+title: "Calendly"
+---
+
+Hier erfährst du, wie du fonio mit deinem Calendly-Konto verbindest, damit dein KI-Assistent Termine direkt in deinen Kalender eintragen kann. In diesem Artikel lernst du Schritt für Schritt, wie du die Calendly-Integration autorisierst, das richtige Ereignis auswählst und deinen Assistenten für die automatisierte Terminplanung konfigurierst.
+
+### Was du benötigst
+
+- Ein aktives Calendly-Konto
+- Deine Calendly-Anmeldedaten (Anmeldung per E‑Mail oder Google/Microsoft)
+- Einen vorkonfigurierten Veranstaltungstyp in Calendly (z. B. "Erstberatung")
+
+---
+
+### Wie es funktioniert
+
+#### 1. Öffne fonio und aktiviere die Terminbuchung
+
+Melde dich in deinem Fonio-Dashboard an und wähle den gewünschten Assistenten aus. Navigiere zum **Termine buchen** Abschnitt in den Assistenteneinstellungen.
+
+#### 2. Wähle Calendly als Anbieter
+
+Wähle **Calendly** aus dem Dropdown-Menü als Anbieter.
+
+#### 3. Verbindung herstellen (OAuth-Anmeldung)
+
+Klicke auf die **"Mit Calendly verbinden"** (oder "Connect") Schaltfläche.
+
+- Ein sicheres **Calendly-Popup-Fenster** wird geöffnet.
+- Melde dich mit deinen üblichen Anmeldedaten an (z. B. „Mit Google anmelden“).
+- Bestätige die Berechtigungsanfrage, damit fonio auf deine verfügbaren Zeiten zugreifen und neue Buchungen erstellen kann.
+- Nach der Bestätigung wird das Fenster automatisch geschlossen und die Verbindung wird hergestellt.
+
+<Frame>
+  ![Image](/images/image-2.png)
+</Frame>
+
+#### 4. Ereignistyp auswählen
+
+Sobald die Verbindung aktiv ist, lädt fonio automatisch deine verfügbaren Calendly‑Events. Wähle das Ereignis aus, das der Assistent für Anrufer buchen soll (z. B. "15‑Minuten‑Meeting").
+
+**Wichtig:** Stelle sicher, dass dieses Calendly‑Event keine **zusätzlichen erforderlichen Felder** (benutzerdefinierte Fragen) enthält. Der Assistent benötigt nur den Namen und (optional) die E‑Mail‑Adresse. Zusätzliche erforderliche Fragen können den Buchungsprozess verhindern.
+
+#### 5. Berechtigungen und Verhalten festlegen
+
+Du kannst jetzt festlegen, wie die KI handeln soll:
+
+- **Nur Verfügbarkeit prüfen:** Die KI liefert nur Informationen über freie Termine.
+- **Termine direkt buchen:** Die KI schließt die Buchung telefonisch ab.
+
+#### 6. Bestätigungsmethode wählen
+
+Wähle aus, ob der Anrufer die Bestätigung per **E-Mail** oder **SMS** erhalten soll. _Tipp:_ Bestätigung per **SMS** ist in der Regel effizienter, da die Handynummer des Anrufers automatisch erkannt wird.
+
+#### 7. Speichern und testen
+
+Klicke auf **Speichern**. Dann benutze die **Audio-Test** Funktion, um den Arbeitsablauf zu überprüfen. Frage einfach den Assistenten: _"Bist du nächsten Dienstag für ein Gespräch verfügbar?"_

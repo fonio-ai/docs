@@ -66,7 +66,13 @@
                 "Tools/AnrufWeiterleitung",
                 "Tools/Terminbuchung",
                 "Tools/Suchanfrage",
-                "Tools/APIRequest"
+                "Tools/APIRequest",
+                {
+                  "group": "Terminbuchung",
+                  "pages": [
+                    "calendly"
+                  ]
+                }
               ]
             },
             {
