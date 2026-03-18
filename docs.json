@@ -64,10 +64,15 @@
               "group": "Tools",
               "pages": [
                 "Tools/AnrufWeiterleitung",
-                "Tools/Terminbuchung",
                 "Tools/Suchanfrage",
                 "Tools/APIRequest",
-                "calendly"
+                {
+                  "group": "Terminbuchung",
+                  "pages": [
+                    "calendly",
+                    "Tools/Terminbuchung"
+                  ]
+                }
               ]
             },
             {
