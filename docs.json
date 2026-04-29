@@ -40,32 +40,24 @@
               ]
             },
             {
-              "group": "Verhalten",
+              "group": "Assistent",
+              "expanded": true,
               "pages": [
-                "Verhalten/Verhalten",
-                "Verhalten/SpracheStimme",
                 "Verhalten/Startnachricht",
+                "Verhalten/SpracheStimme",
                 "Verhalten/Prompt",
-                "Verhalten/Wissensdatenbank"
-              ]
-            },
-            {
-              "group": "Technisches",
-              "pages": [
-                "Technisches/AnrufEinstellungen",
-                "Technisches/Audio",
-                "Technisches/Funktionen",
-                "Technisches/Aufzeichnung",
-                "Technisches/VariablenExtraktion",
-                "Technisches/InboundWebhook"
-              ]
-            },
-            {
-              "group": "Tools",
-              "pages": [
-                "Tools/AnrufWeiterleitung",
-                "Tools/Suchanfrage",
-                "Tools/APIRequest",
+                {
+                  "group": "Beispiel-Prompts",
+                  "pages": [
+                    "Beispiele/Anrufbeantworter",
+                    "Beispiele/Empfangsperson",
+                    "Beispiele/Terminbuchung",
+                    "Beispiele/FirstLevelSupport"
+                  ]
+                },
+                "Technisches/InboundWebhook",
+                "Nachverarbeitung/EmailVersenden",
+                "Nachverarbeitung/SMSVersenden",
                 {
                   "group": "Terminbuchung",
                   "pages": [
@@ -73,15 +65,17 @@
                     "calendly",
                     "Tools/Terminbuchung"
                   ]
+                },
+                {
+                  "group": "Technisches",
+                  "pages": [
+                    "Technisches/AnrufEinstellungen",
+                    "Technisches/Audio",
+                    "Technisches/Funktionen",
+                    "Technisches/Aufzeichnung",
+                    "Technisches/VariablenExtraktion"
+                  ]
                 }
-              ]
-            },
-            {
-              "group": "Nachverarbeitung",
-              "pages": [
-                "Nachverarbeitung/EmailVersenden",
-                "Nachverarbeitung/SMSVersenden",
-                "Nachverarbeitung/APIRequest"
               ]
             },
             {
@@ -110,15 +104,6 @@
                 "SIP-Telefonnummern/Fonial",
                 "SIP-Telefonnummern/Sipgate",
                 "SIP-Telefonnummern/andere-anbieter"
-              ]
-            },
-            {
-              "group": "Beispiel-Prompts",
-              "pages": [
-                "Beispiele/Anrufbeantworter",
-                "Beispiele/Empfangsperson",
-                "Beispiele/Terminbuchung",
-                "Beispiele/FirstLevelSupport"
               ]
             },
             {
