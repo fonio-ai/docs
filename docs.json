@@ -9,25 +9,6 @@
     },
     "favicon": "/logo/fonio-logo.png",
     "navigation": {
-      "global": {
-        "anchors": [
-          {
-            "anchor": "fonio.ai",
-            "icon": "phone",
-            "href": "https://www.fonio.ai/"
-          },
-          {
-            "anchor": "fonio Plattform",
-            "icon": "phone",
-            "href": "https://app.fonio.ai/"
-          },
-          {
-            "anchor": "Blog",
-            "icon": "newspaper",
-            "href": "https://www.fonio.ai/blog-tags/blog-article"
-          }
-        ]
-      },
       "tabs": [
         {
           "tab": "Help Center",
