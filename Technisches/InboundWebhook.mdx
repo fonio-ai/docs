@@ -23,7 +23,7 @@ In diesem Guide zeigen wir dir Schritt für Schritt, wie du das neue Feature mit
 
 Für die Einrichtung sind folgende Punkte erforderlich:
 
-1. **Automation-Software** wie _Make.com_, um den Webhook abzufangen und eine Datenbankabfrage auszuführen.
+1. **Automation-Software** wie _n8n.com_, um den Webhook abzufangen und eine Datenbankabfrage auszuführen.
 2. **Datenbank mit Kundendaten**, z. B. ein Google Sheet mit Telefonnummern und Kundennamen.
 3. **Tool zum Testen des Webhooks**, wie _Postman_, um die Funktionsweise vor dem Live-Betrieb zu prüfen.
 
@@ -62,7 +62,6 @@ Für die Einrichtung sind folgende Punkte erforderlich:
 2. **Google Sheets „SearchRows“**: Abfrage nach Telefonnummer.
 3. **Router Node**: Unterscheidung zwischen _Name gefunden_ / _Name nicht gefunden_.
 4. **Webhook Response**: Variable `{{name}}` oder „nicht gefunden“ zurückgeben.
-
    > Achte darauf, in den **Advanced Settings** den `content-type` auf **application/json** zu setzen.
 
 ---
@@ -71,7 +70,6 @@ Für die Einrichtung sind folgende Punkte erforderlich:
 
 - Erstelle eine **POST-Request** an die Webhook-URL.
 - Verwende JSON im Body, z. B.:
-
   ```json
   { "fromNumber": "+4915123456789", "toNumber": "+49891234567" }
   ```

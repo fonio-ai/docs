@@ -1,0 +1,159 @@
+---
+title: "Webhook nach dem Anruf"
+---
+
+## Übersicht
+
+Der **Webhook nach dem Anruf** wird automatisch ausgelöst, sobald ein Gespräch beendet ist. Er sendet alle im Gespräch gesammelten Informationen an ein externes System – eine Antwort zurück an den Assistenten ist nicht erforderlich, da der Anruf bereits abgeschlossen ist.
+
+Typischer Anwendungsfall: Ein Anrufer gibt während des Gesprächs eine Bestellung auf. Sobald das Gespräch endet, werden alle Bestelldetails automatisch in einer Datenbank oder einem CRM gespeichert.
+
+## Wie es funktioniert
+
+<iframe src="https://www.youtube.com/embed/LgbXqR6rRL4" title="YouTube video player" frameborder="0" className="w-full aspect-video rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
+
+1. Anruf wird beendet
+2. fonio sendet POST-Request an die Webhook-URL
+3. Extrahierte Variablen aus dem Gespräch werden mitgesendet
+4. Externes System (z.B. n8n) verarbeitet und speichert die Daten
+
+## Konfiguration in fonio
+
+### Schritt 1 – Webhook nach dem Anruf aktivieren
+
+1. Navigiere zu deinem Assistenten → **Webhooks**
+2. Aktiviere den **Webhook nach dem Anruf**
+3. Wähle als Methode **POST**
+4. Füge die Webhook-URL deines Automatisierungstools (z.B. n8n) ein
+
+### Schritt 2 – Variablen am Assistenten aufsetzen
+
+Der Post-Call Webhook verwendet keine dynamischen Parameter wie der During-Call Webhook. Stattdessen sendet er die **extrahierten Variablen**, die du direkt am Assistenten definierst.
+
+1. Navigiere zu deinem Assistenten → **Technische Einstellungen**
+2. Füge alle Variablen hinzu, die aus dem Gespräch extrahiert werden sollen
+
+<Frame>
+  ![Bildschirmfoto 2026 04 29 Um 14 08 53](/images/Bildschirmfoto-2026-04-29-um-14.08.53.png)
+</Frame>
+
+**Beispiel-Variablen für einen Bestellungs-Use-Case:**
+
+| Variable | Beschreibung |
+| :-- | :-- |
+| `name` | Vollständiger Name des Anrufers |
+| `phone_number` | Telefonnummer des Anrufers |
+| `artikel` | Bestellte(s) Produkt(e) |
+| `zahlungsmittel` | Gewählte Zahlungsart |
+| `adresse` | Lieferadresse |
+
+> **Tipp:** Wenn du vermeiden möchtest, dass der Assistent nach der Telefonnummer fragt, füge folgendes in den Prompt ein: _„Übernehme die Telefonnummer vom Anrufer."_ fonio verwendet dann automatisch die `from_number`.
+
+### Schritt 3 – Abzufragende Informationen im System-Prompt definieren
+
+Verwende klare Wenn-dann-Formulierungen im Prompt, um dem Assistenten mitzuteilen, welche Informationen er sammeln soll. Beispiel:
+
+```text
+Wenn jemand eine Bestellung tätigen möchte, erfrage folgende Informationen:
+- Name
+- Telefonnummer
+- Artikel und Menge
+- Zahlungsmittel (z.B. Kreditkarte, Rechnung)
+- Lieferadresse
+```
+
+> Halte Prompts kurz, direkt und konkret. Wenn-dann-Formulierungen funktionieren für den Assistenten am besten.
+
+---
+
+## Beispiel-Workflow mit n8n und Google Sheets
+
+### Ziel
+
+Wenn ein Anruf endet und eine Bestellung aufgegeben wurde, werden alle Bestelldetails als neue Zeile in einer Google-Sheets-Auftragsliste gespeichert.
+
+### Schritt 1 – Webhook-Node in n8n anlegen
+
+Erstelle in n8n einen neuen Workflow mit einem **Webhook-Node** als Startpunkt. Die generierte Webhook-URL kopierst du in das Post-Call-Webhook-Feld in fonio.
+
+### Schritt 2 – Neue Zeile in Google Sheets einfügen
+
+Füge einen **Google Sheets Node** mit folgender Konfiguration hinzu:
+
+| Einstellung | Wert |
+| :-- | :-- |
+| Operation | `Append Row` |
+| Dokument | Deine Auftragsliste (z.B. `Neue Bestellungen`) |
+| Sheet | Gewünschtes Sheet |
+
+Weise jede eingehende Variable der entsprechenden Spalte zu:
+
+| Spalte | Wert |
+| :-- | :-- |
+| Datum | `{{ $now }}` |
+| Name | `{{ $json.name }}` |
+| Telefonnummer | `{{ $json.phone_number }}` |
+| Artikel | `{{ $json.artikel }}` |
+| Zahlungsmittel | `{{ $json.zahlungsmittel }}` |
+| Adresse | `{{ $json.adresse }}` |
+
+> **Wichtig:** Verwende hier `Append Row` – nicht `Get Row` wie bei den vorherigen Webhook-Typen. Ziel ist es, neue Daten zu schreiben, nicht vorhandene Daten auszulesen.
+
+**Beispielergebnis in Google Sheets:**
+
+| Datum | Name | Telefonnummer | Artikel | Zahlungsmittel | Adresse |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| 14. April 2026 | Christian | \+4312345678 | 5 Tische | Kreditkarte | Neustiftgasse 7 |
+
+### Schritt 3 – Keine Rückantwort erforderlich
+
+Da der Anruf bereits beendet ist, muss n8n keine Daten an fonio zurücksenden. Der Workflow speichert die Daten und ist damit abgeschlossen.
+
+---
+
+## Beispiel-Gesprächsverlauf
+
+```text
+Anrufer:    "Hallo, ich möchte bitte eine Bestellung aufgeben."
+Assistent:  "Gerne! Bitte nennen Sie mir Ihren Namen."
+Anrufer:    "Christian."
+Assistent:  "Und Ihre Telefonnummer?"
+Anrufer:    "Die, mit der ich gerade anrufe."
+Assistent:  "Verstanden. Was möchten Sie bestellen?"
+Anrufer:    "Fünf Tische bitte."
+Assistent:  "Welches Zahlungsmittel möchten Sie verwenden?"
+Anrufer:    "Kreditkarte."
+Assistent:  "Und Ihre Lieferadresse?"
+Anrufer:    "Neustiftgasse 7."
+Assistent:  "Danke, ich habe Ihre Bestellung notiert.
+             Sie erhalten eine Bestätigung per E-Mail.
+             Kann ich sonst noch etwas für Sie tun?"
+Anrufer:    "Nein, danke. Tschüss."
+            [Anruf endet → Post-Call Webhook wird ausgelöst → neue Zeile in Google Sheets]
+```
+
+---
+
+## Fehlerbehebung
+
+Falls die Daten nicht korrekt gespeichert werden, hilft ein Blick in die **Executions** in n8n:
+
+- Wurde der Webhook nach dem Anruf ausgelöst?
+- Wurden alle Variablen mit den richtigen Werten übermittelt?
+- Hat der Google Sheets Node die neue Zeile erfolgreich hinzugefügt?
+
+Überprüfe außerdem die Variablen in den **Technischen Einstellungen** deines Assistenten – fehlt eine Variable dort, wird sie auch nicht im Webhook-Payload mitgesendet.
+
+---
+
+## Weitere Webhook-Typen
+
+fonio unterstützt insgesamt drei Webhook-Typen:
+
+| Webhook | Zeitpunkt | Typischer Use Case |
+| :-- | :-- | :-- |
+| **Inbound Webhook** | Vor dem Anruf | Kundendaten nachschlagen, personalisierte Begrüßung |
+| **During-Call Webhook** | Während des Anrufs | Echtzeit-Daten abrufen oder übergeben |
+| **Post-Call Webhook** | Nach dem Anruf | Gesprächsergebnis speichern, Follow-up-Aktionen auslösen |
+
+Die grundlegende Funktionsweise ist bei allen drei Typen ähnlich. Wer einen Webhook-Typ beherrscht, kann die anderen schnell einrichten.

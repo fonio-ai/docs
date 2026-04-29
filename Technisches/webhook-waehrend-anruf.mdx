@@ -1,0 +1,159 @@
+---
+title: "Webhook während des Anrufs"
+---
+
+## Übersicht
+
+Der **Webhook während des Anrufs** wird mitten im Gespräch ausgelöst – basierend auf einer Bedingung, die du selbst definierst. Fragt ein Anrufer nach einer bestimmten Information, z.B. dem Status einer Bestellung, holt der Assistent diese Information in Echtzeit über eine externe API ab und gibt die Antwort direkt im Gespräch zurück.
+
+Typischer Anwendungsfall: Ein Anrufer fragt nach dem Status seiner Lieferung. Der Assistent fragt die Bestellnummer ab, ruft das externe System ab und liest das Ergebnis vor.
+
+## Wie es funktioniert
+
+<iframe src="https://www.youtube.com/embed/QlyuXEhmtkk" title="YouTube video player" frameborder="0" className="w-full aspect-video rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
+
+1. Anrufer stellt eine Frage, die der definierten Bedingung entspricht
+2. fonio sendet POST-Request an die Webhook-URL
+3. Assistent gibt eine Wartemeldung aus (bis zu 5 Sekunden)
+4. Externes System (z.B. n8n) sucht die Daten heraus
+5. Daten werden an den Assistenten zurückgegeben
+6. Assistent beantwortet die Frage des Anrufers
+
+## Konfiguration in fonio
+
+1. Navigiere zu deinem Assistenten → **Webhooks**
+2. Aktiviere den **Webhook während des Anrufs**
+3. Wähle als Methode **POST**
+4. Füge die Webhook-URL deines Automatisierungstools (z.B. n8n) ein
+5. Füge eine **Beschreibung und Bedingung** hinzu, die definiert, wann der Webhook ausgelöst wird
+6. Definiere eine **Wartemeldung**, die der Assistent während der Verarbeitung ausspricht
+7. Konfiguriere die **dynamischen Parameter**, die mit dem Request mitgesendet werden
+
+### Beschreibung & Bedingung
+
+Beschreibe klar, wann der Webhook ausgelöst werden soll. Beispiel:
+
+> _"Gib Bestellinformationen zurück, wenn der Anrufer den Status seiner Bestellung erfahren möchte."_
+
+Je konkreter die Bedingung, desto zuverlässiger löst der Assistent den Webhook zum richtigen Zeitpunkt aus.
+
+### Wartemeldung
+
+Da der API-Request bis zu 5 Sekunden dauern kann, kannst du eine Meldung konfigurieren, die der Assistent in dieser Zeit ausspricht. Beispiel:
+
+> _"Einen Moment, ich suche die Informationen zu Ihrer Bestellung heraus."_
+
+### Dynamische Parameter
+
+Dynamische Parameter legen fest, welche Information aus dem Gespräch extrahiert und mit dem Webhook-Request mitgesendet wird. Im Unterschied zur Inbound Webhook – die nur `from_number` und `to_number` übergibt – kann der During-Call Webhook spezifische Werte aus dem Gespräch herausziehen (z.B. eine Bestellnummer).
+
+**Dynamische Parameter einrichten:**
+
+Nutze den integrierten Parameter-Builder in fonio. Du kannst:
+
+- Beschreiben, was extrahiert werden soll (in natürlicher Sprache)
+- Einen Screenshot deiner API-Struktur hochladen
+- Beispielwerte manuell eintragen
+
+fonio stellt außerdem einen **Generator** (verknüpft mit ChatGPT) zur Verfügung, der dir beim Aufbau des richtigen JSON-Schemas hilft.
+
+**Beispiel für einen dynamischen Parameter:**
+
+| Parameter | Beschreibung | Beispielwert |
+| :-- | :-- | :-- |
+| `order_number` | Bestellnummer, die der Anrufer nennt | `BP20260016` |
+
+<Tip>
+  **Tipp:** Teile dem Assistenten immer mit, in welchem Format der gesuchte Wert vorliegt. Füge z.B. folgendes in den Prompt ein: _„Die Bestellnummer hat immer das Format BP20260001."_ Das verbessert die Erkennungsgenauigkeit erheblich – ohne diesen Hinweis kann es passieren, dass der Assistent den Wert falsch aufnimmt oder falsch formatiert.
+</Tip>
+
+## Beispiel-Workflow mit n8n und Google Sheets
+
+### Ziel
+
+Wenn ein Anrufer seine Bestellnummer nennt, wird diese in einer Google-Sheets-Auftragsliste nachgeschlagen und die Bestelldetails an den Assistenten zurückgegeben.
+
+### Schritt 1 – Webhook-Node in n8n anlegen
+
+Erstelle in n8n einen neuen Workflow mit einem **Webhook-Node** als Startpunkt. Die generierte Webhook-URL kopierst du in das During-Call-Webhook-Feld in fonio.
+
+### Schritt 2 – Google Sheets abfragen
+
+Füge einen **Google Sheets Node** mit folgender Konfiguration hinzu:
+
+| Einstellung | Wert |
+| :-- | :-- |
+| Operation | `Get Row` |
+| Dokument | Deine Auftragsliste (z.B. `Auftragsliste`) |
+| Sheet | Gewünschtes Sheet |
+| Filter-Spalte | `Auftragsnummer` |
+| Filter-Wert | `{{ $json.order_number }}` |
+
+Wenn die `order_number` aus dem fonio-Webhook mit einem Eintrag in der Spalte **Auftragsnummer** übereinstimmt, gibt Google Sheets alle Felder dieser Zeile zurück.
+
+**Beispielstruktur der Google Sheets Auftragsliste:**
+
+| Auftragsnummer | Kunde | Produkt | Liefertermin | Status |
+| :-- | :-- | :-- | :-- | :-- |
+| BP20260016 | Muster GmbH | Kabelbinder, Marker, Post-its | 15. April 2026 | In Zustellung |
+
+### Schritt 3 – Daten an fonio zurückgeben
+
+n8n sendet die Antwort automatisch zurück an fonio. Der Assistent erhält alle Felder der gefundenen Zeile als Variablen und kann dem Anrufer direkt antworten.
+
+---
+
+## Assistent konfigurieren
+
+### Verhaltensregel im System-Prompt
+
+Definiere, wann der Webhook ausgelöst werden soll, und welche Information vorher abgefragt werden muss:
+
+```text
+Wenn jemand den Status seiner Bestellung wissen möchte, frage zuerst nach der Bestellnummer.
+Die Bestellnummer hat immer das Format BP20260001.
+```
+
+> Das Format der gesuchten Information anzugeben ist entscheidend. Ohne diesen Hinweis kann der Assistent den Wert aus dem gesprochenen Gespräch möglicherweise nicht zuverlässig erfassen.
+
+### Beispiel-Gesprächsverlauf
+
+```text
+Anrufer:    "Hallo, ich habe vor einiger Zeit bestellt, aber noch nichts erhalten.
+             Können Sie mir sagen, was der Status ist?"
+Assistent:  "Natürlich! Können Sie mir bitte Ihre Bestellnummer nennen?"
+Anrufer:    "Ja, die ist BP20260016."
+Assistent:  "Einen Moment, ich suche die Informationen zu Ihrer Bestellung heraus."
+            [Webhook wird ausgelöst, n8n fragt Google Sheets ab]
+Assistent:  "Ihre Bestellung BP20260016 befindet sich aktuell in Zustellung.
+             Der geplante Liefertermin ist der 15. April 2026.
+             Die Bestellung enthält Kabelbinder, Marker und Post-its.
+             Kann ich Ihnen sonst noch weiterhelfen?"
+```
+
+---
+
+## Fehlerbehebung
+
+Falls der Webhook nicht ausgelöst wird oder falsche Daten zurückgibt, hilft ein Blick in die **Executions** in n8n:
+
+- Wurde der Webhook überhaupt getriggert?
+- Welche `order_number` wurde übermittelt – wurde sie korrekt erkannt?
+- Hat Google Sheets einen Treffer zurückgegeben?
+- Welche Felder wurden an fonio zurückgesendet?
+
+Jeder Anruf erzeugt einen eigenen Execution-Eintrag mit allen Zwischenschritten und übertragenen Werten – das erleichtert die Diagnose erheblich.
+
+---
+
+## Weitere Webhook-Typen
+
+fonio unterstützt insgesamt drei Webhook-Typen:
+
+| Webhook | Zeitpunkt | Typischer Use Case |
+| :-- | :-- | :-- |
+| **Inbound Webhook** | Vor dem Anruf | Kundendaten nachschlagen, personalisierte Begrüßung |
+| **During-Call Webhook** | Während des Anrufs | Echtzeit-Daten abrufen oder übergeben |
+| **Post-Call Webhook** | Nach dem Anruf | Gesprächsergebnis speichern, Follow-up-Aktionen auslösen |
+
+Die grundlegende Funktionsweise ist bei allen drei Typen ähnlich. Wer den During-Call Webhook beherrscht, kann die anderen schnell einrichten.
