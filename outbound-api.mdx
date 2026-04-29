@@ -1,0 +1,166 @@
+---
+title: "Outbound API"
+---
+
+Hier findest du Informationen bezüglich der Outbound API.
+
+<Note>
+  Für Outbound Kampagnen benötigst du eine **Importierte Nummer &** das **Teams Abo**
+</Note>
+
+## Übersicht
+
+Die **Outbound API** ermoeglicht es, einen ausgehenden Anruf programmgesteuert auszuloesen - direkt aus deinem eigenen System, CRM oder Automatisierungstool. Sobald ein definiertes Ereignis eintritt (z.B. eine Formularuebermittlung oder ein neuer Lead), sendet dein System einen API-Request an fonio und der Assistent ruft die angegebene Nummer sofort an.
+
+Typischer Anwendungsfall: Ein Bewerber fuellt ein Formular auf deiner Website aus. Ein automatisierter Workflow sendet seine Daten via API an fonio und der Assistent ruft die Person innerhalb von Sekunden an.
+
+<iframe src="https://www.youtube.com/embed/m9-3Ln5HapU" title="YouTube video player" frameborder="0" className="w-full aspect-video rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
+
+## Voraussetzungen
+
+### Telefonnummer
+
+Outbound-Anrufe koennen nur von **importierten Nummern** oder **SIP Trunks (ZIPN)** aus getaetigt werden. Die schnellste Option ist, eine bestehende Nummer zu importieren.
+
+**So importierst du eine Nummer:**
+
+1. Navigiere zu **Telefonnummern** -\> **Nummer hinzufuegen** -\> **Nummern importieren**
+2. Trage die Telefonnummer ein und weise sie einem Assistenten zu
+3. fonio ruft diese Nummer mit einem Bestaetigungscode an - trage den Code ein, um zu bestaetigen
+4. Die Nummer ist nun importiert und kann fuer Outbound-Anrufe genutzt werden
+
+Ob eine Nummer ausgehende Anrufe unterstuetzt, erkennst du am **Nutzungsindikator** neben jeder Nummer in der Uebersicht.
+
+### Assistent konfigurieren
+
+Bevor du Outbound-Anrufe per API triggerst, stelle sicher, dass dein Assistent korrekt eingerichtet ist:
+
+- Der **Prompt** beschreibt den Zweck des Anrufs, den Ton und die zu stellenden Fragen
+- Alle **Variablen**, die du per API sendest, muessen im Prompt referenziert sein (z.B. Vorname, E-Mail)
+- Verwende **Wenn-dann-Logik** fuer verschiedene Szenarien (z.B. wenn kein Interesse besteht, Anruf hoeflich beenden)
+- Der Assistent muss mit der verwendeten **Telefonnummer verbunden** sein
+
+**Beispiel-Prompt-Struktur:**
+
+```text
+Du bist Lena, Mitarbeiterin bei fonio. Du rufst Bewerber outbound an,
+um zu qualifizieren, ob sie beim Buero-Umzug und Moebelaufbau helfen koennen.
+
+Ziel: Interesse, Verfuegbarkeit und Standort in 2-4 Minuten klaeren.
+Ton: freundlich und professionell.
+
+Bewerberdaten, die per API uebermittelt werden:
+- Vorname: {{first_name}}
+- Nachname: {{last_name}}
+- E-Mail: {{email}}
+
+Gespraechsablauf:
+1. Bestaetigen, dass sich die Person fuer den Umzugseinsatz beworben hat.
+   Bei kein Interesse: bedanken und Anruf beenden.
+2. Nach Verfuegbarkeit fragen.
+3. Nach Standort fragen.
+4. Anruf abschliessen und naechste Schritte erklaeren.
+```
+
+---
+
+## API-Konfiguration
+
+### Outbound API URL finden
+
+1. Navigiere zu deinem Assistenten -\> **Webhooks**
+2. Oeffne den Bereich **Outbound API**
+3. Kopiere die angezeigte API URL - das ist der Endpunkt, den du aus deinem externen System aufrufst
+
+### Request-Struktur
+
+Sende einen **POST**-Request an die Outbound API URL mit folgendem JSON-Body:
+
+json
+
+```text
+{
+  "api_key": "DEIN_API_SCHLUESSEL",
+  "from_number": "+43123456789",
+  "to_number": "+43198765432",
+  "agent_id": "DEINE_AGENT_ID",
+  "first_name": "Christian",
+  "last_name": "Mueller",
+  "email": "christian@example.com"
+}
+```
+
+### Pflichtfelder
+
+| Feld | Beschreibung |
+| :-- | :-- |
+| `api_key` | Dein fonio API-Schluessel - zu finden unter **API-Schluessel** im linken Seitenmenue |
+| `from_number` | Die importierte Nummer oder ZIPN, von der aus angerufen wird - muss mit dem Assistenten verbunden sein |
+| `to_number` | Die anzurufende Nummer (typischerweise eine Variable aus deinem System) |
+| `agent_id` | Die ID des Assistenten, der den Anruf fuehren soll |
+
+### Optionale Felder
+
+Alle weiteren Felder im Request-Body werden dem Assistenten als Variablen uebergeben, sofern sie im Prompt referenziert sind.
+
+| Feld | Beispielwert |
+| :-- | :-- |
+| `first_name` | `"Christian"` |
+| `last_name` | `"Mueller"` |
+| `email` | `"christian@example.com"` |
+| Beliebiges Feld | Beliebiger Wert |
+
+---
+
+## Beispiel-Workflow mit n8n
+
+### Ziel
+
+Wenn sich jemand ueber ein Formular bewirbt, werden die Daten in Google Sheets gespeichert und gleichzeitig ein Outbound-Anruf via fonio API ausgeloest.
+
+### Schritt 1 - Formular-Trigger
+
+Verwende einen **Form-Node** oder **Webhook-Node** in n8n als Startpunkt. Sobald das Formular abgeschickt wird, fliessen alle Felder (Name, E-Mail, Telefonnummer) in den Workflow.
+
+### Schritt 2 - In Google Sheets speichern
+
+Fuege einen **Google Sheets Node** (Operation: `Append Row`) hinzu, um die Bewerberdaten zu protokollieren.
+
+### Schritt 3 - Outbound Anruf ausloesen
+
+Fuege einen **HTTP Request Node** mit folgender Konfiguration hinzu:
+
+| Einstellung | Wert |
+| :-- | :-- |
+| Methode | `POST` |
+| URL | Deine fonio Outbound API URL |
+| Body-Typ | `JSON` |
+
+Mappe die Formular-Variablen in den Request-Body:
+
+json
+
+```text
+{
+  "api_key": "DEIN_API_SCHLUESSEL",
+  "from_number": "+43123456789",
+  "agent_id": "DEINE_AGENT_ID",
+  "to_number": "{{ $json.phone_number }}",
+  "first_name": "{{ $json.first_name }}",
+  "last_name": "{{ $json.last_name }}",
+  "email": "{{ $json.email }}"
+}
+```
+
+Sobald n8n diesen Schritt ausfuehrt, loest fonio den Outbound-Anruf sofort aus.
+
+---
+
+## Fehlerbehebung
+
+| Problem | Was pruefen |
+| :-- | :-- |
+| Anruf wird nicht ausgeloest | API-Schluessel pruefen und sicherstellen, dass der Request-Body gueltiges JSON ist |
+| Assistent hat waehrend des Anrufs keine Kundendaten | Sicherstellen, dass Variablennamen im Request mit denen im Prompt uebereinstimmen |
+| Falsche Nummer ruft an | Bestaetigen, dass `from_number` importiert und mit dem richtigen Assistenten verbunden ist |
+| Falsche Person wird angerufen | `to_number`-Mapping im Workflow pruefen |

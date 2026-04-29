@@ -1,0 +1,126 @@
+---
+title: "Outbound Kampagne"
+---
+
+Hier findest du informationen bezüglich der Outbound Kampagne.
+
+<Note>
+  Für Outbound Kampagnen benötigst du eine **Importierte Nummer &** das **Teams Abo**
+</Note>
+
+## Übersicht
+
+Das Feature **Outbound Kampagne** ermöglicht es dir, automatisch eine Liste von Kontakten über einen fonio-Assistenten anzurufen. Lade einfach eine CSV-Datei mit Telefonnummern hoch, konfiguriere die Kampagneneinstellungen und fonio übernimmt den Rest.
+
+Typischer Anwendungsfall: Proaktive Kontaktaufnahme mit einer Kundenliste – z.B. für Terminerinnerungen, Follow-ups oder Ankündigungen.
+
+<iframe src="https://www.youtube.com/embed/kHWMWpOPPB8" title="YouTube video player" frameborder="0" className="w-full aspect-video rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen />
+
+## Voraussetzungen
+
+### 1 – Telefonnummer einrichten
+
+Für ausgehende Anrufe benötigst du eine Telefonnummer, die Outbound-Anrufe unterstützt. fonio bietet zwei Möglichkeiten:
+
+- **Importierte Nummer** Die schnellste Möglichkeit. Importiere deine bestehende Nummer in fonio. [Hier eine Anleitung.](https://docs.fonio.ai/Telefonnummern/IndividuelleTelefonnummern)
+- **SIP Trunk** Erstelle eine SIP-basierte Nummer.
+
+Ob eine Nummer ausgehende Anrufe unterstützt, erkennst du im **mittleren Reiter** in den Telefonnummer-Einstellungen – dort wird angezeigt, ob eingehende und/oder ausgehende Anrufe möglich sind.
+
+### 2 – Assistent konfigurieren
+
+Stelle sicher, dass dein Assistent alle relevanten Informationen und Anweisungen für den Outbound-Anruf hat, bevor du die Kampagne startest.
+
+---
+
+## Kontaktliste vorbereiten
+
+Kontakte werden als **CSV-Datei** hochgeladen. Die Datei muss einer bestimmten Struktur folgen, damit fonio sie korrekt verarbeiten kann.
+
+### Pflichtfeld
+
+| Spaltenname | Beschreibung | Beispiel |
+| :-- | :-- | :-- |
+| `phone_number` | Die anzurufende Telefonnummer | `'+43123456789` |
+
+> **Wichtig:** Die Spalte muss exakt `phone_number` heißen (Kleinbuchstaben, mit Unterstrich).
+
+<Frame>
+  ![Bildschirmfoto 2026 04 29 Um 14 22 51](/images/Bildschirmfoto-2026-04-29-um-14.22.51.png)
+</Frame>
+
+### Optionale Spalten
+
+Du kannst beliebig viele weitere Spalten hinzufügen (z.B. `name`, `firma`, `notizen`). Diese stehen dem Assistenten während des Anrufs als Kontext zur Verfügung.
+
+### Telefonnummern richtig formatieren
+
+Telefonnummern müssen im internationalen Format mit `+`-Präfix angegeben werden. Da Tabellenkalkulationsprogramme (z.B. Google Sheets oder Excel) das `+`-Zeichen beim Export oft entfernen, füge vor der Nummer ein Apostroph ein:
+
+```text
+'+43123456789
+```
+
+Das Apostroph erzwingt, dass die Zelle als Text behandelt wird – so bleibt das `+` beim CSV-Export erhalten.
+
+**Beispiel-CSV-Struktur:**
+
+| phone\_number | name |
+| :-- | :-- |
+| `'+43123456789` | Christian |
+| `'+43198765432` | Laura |
+
+### Als CSV exportieren
+
+Sobald die Liste fertig ist, exportiere sie:
+
+- Google Sheets: **Datei → Herunterladen → Kommagetrennte Werte (.csv)**
+- Excel: **Datei → Speichern unter → CSV (Trennzeichen-getrennt)**
+
+---
+
+## Kampagne erstellen
+
+1. Navigiere zu **Outbound Kampagnen** in fonio
+2. Klicke auf **Neue Kampagne**
+3. Fülle die Kampagneneinstellungen aus:
+
+### Kampagneneinstellungen
+
+| Einstellung | Beschreibung |
+| :-- | :-- |
+| **Kampagnenname** | Gib der Kampagne einen eindeutigen Namen – das heutige Datum erleichtert die spätere Identifikation |
+| **Telefonnummer** | Wähle die importierte oder SIP-Nummer, von der aus angerufen wird |
+| **Startzeitpunkt** | Lege Datum und Uhrzeit fest, ab wann Anrufe gestartet werden sollen |
+| **Anrufzeiten** | Definiere das Zeitfenster, in dem Anrufe erlaubt sind (z.B. 09:00–18:00 Uhr) |
+| **Intervall zwischen Anrufen** | Lege fest, wie viel Zeit zwischen den einzelnen Anrufen vergehen soll |
+| **Kontaktliste** | Lade die vorbereitete CSV-Datei hoch |
+
+> **Hinweis zu Anrufzeiten:** Wenn du hunderte Kontakte anrufst, kann sich die Kampagne über mehrere Stunden erstrecken. Die Anrufzeiten stellen sicher, dass niemand außerhalb des definierten Zeitfensters angerufen wird – verbleibende Anrufe werden automatisch am nächsten Tag fortgesetzt.
+
+4. Überprüfe die Vorschau – fonio zeigt dir, wie die Telefonnummern und zusätzlichen Spalten eingelesen wurden. Wenn alles stimmt, klicke auf **Kampagne erstellen**.
+
+---
+
+## Kampagne überwachen
+
+Nach der Erstellung zeigt die Kampagne den geplanten Startzeitpunkt. Sobald sie läuft, kannst du den Fortschritt in Echtzeit verfolgen:
+
+- **Welche Nummer wen angerufen hat**
+- **Gesprächsdauer**
+- **Ergebnis des Anrufs**
+- **Vollständiges Transkript** jedes Gesprächs
+- **Kontext** (die zusätzlichen Spalten aus der CSV)
+
+Öffne einfach einen abgeschlossenen Anrufeintrag in der Kampagnenübersicht, um die Details einzusehen.
+
+---
+
+## Fehlerbehebung
+
+| Problem | Was überprüfen |
+| :-- | :-- |
+| Anrufe werden nicht gestartet | Überprüfe, ob die gewählte Telefonnummer Outbound-Anrufe unterstützt |
+| Nummern werden nicht erkannt | Stelle sicher, dass die Spalte exakt `phone_number` heißt und Nummern mit `+` beginnen |
+| Das `+`-Zeichen fehlt bei den Nummern | Füge vor der Nummer in der Tabelle ein Apostroph (`'`) ein |
+| Kampagne startet nicht | Überprüfe, ob der Startzeitpunkt korrekt gesetzt und die CSV erfolgreich hochgeladen wurde |

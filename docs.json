@@ -78,7 +78,10 @@
                 },
                 {
                   "group": "Outbound Anrufe",
-                  "pages": []
+                  "pages": [
+                    "outbound-kamapgne",
+                    "outbound-api"
+                  ]
                 },
                 {
                   "group": "API / Webhook",
