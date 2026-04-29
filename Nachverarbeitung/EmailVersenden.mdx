@@ -3,6 +3,10 @@ title: "Email Versenden"
 description: "Hier erfährst du, wie du Emails in der Nachverarbeitung von Anrufen bei fonio nutzen kannst."
 ---
 
+<Frame>
+  ![Bildschirmfoto 2026 04 29 Um 11 38 47](/images/Bildschirmfoto-2026-04-29-um-11.38.47.png)
+</Frame>
+
 In diesem Beitrag lernst du Schritt für Schritt, wie du mit fonio Anrufe automatisch per Email nachverarbeiten kannst. Du kannst dir beispielsweise das Transkript, oder bestimmte Informationen dynamisch per Mail senden lassen, sobald fonio einen Anruf für dich übernommen hat.
 
 ## So funktioniert es
@@ -23,7 +27,6 @@ In diesem Beitrag lernst du Schritt für Schritt, wie du mit fonio Anrufe automa
 
     1. `Statische Empfänger:` Hier gibst du einfach an, an welche Email Adresse(n) das Mail versandt werden soll.
     2. `Dynamische Empfänger:` Hier kannst du dynamisch festlegen, unter welcher Bedingung die Mail an welchen Empfänger gehen soll. Du kannst also einen eigenen Prompt bauen, wie genau Mails versandt werden sollen.
-
        <img
          src="/images/CleanShot2025-08-13at15.35.14@2x.png"
          alt="Clean Shot2025 08 13at15 35 14@2x Pn"
@@ -35,7 +38,6 @@ In diesem Beitrag lernst du Schritt für Schritt, wie du mit fonio Anrufe automa
     Hier gibt es wieder 2 Möglichkeiten, den Inhalt der Mail festzulegen:
 
     1. `Standard:` Hier kannst du eine fixe Nachricht festlegen, die immer gleich versandt wird. Du kannst hier verschiedene Variablen einsetzen, die während dem Gespräch extrahiert wurden, oder ohnehin vorhanden sind. Variablen aus dem Inbound Webhook oder dem Kontext des Outbound API Calls kannst du auch mit `context.variable` einfügen
-
        <img
          src="/images/CleanShot2025-08-13at15.35.55@2x.png"
          alt="Clean Shot2025 08 13at15 35 55@2x Pn"
@@ -43,7 +45,6 @@ In diesem Beitrag lernst du Schritt für Schritt, wie du mit fonio Anrufe automa
          style={{ width:"70%" }}
        />
     2. `Individueller Prompt:` Hier kannst du festlegen, was in der Nachricht enthalten sein soll. Hier schreibst du einen Prompt, mit dem die KI, basierend auf dem Transkript, eine individuelle Email verfasst.
-
        <img
          src="/images/CleanShot2025-08-13at15.36.22@2x.png"
          alt="Clean Shot2025 08 13at15 36 22@2x Pn"
