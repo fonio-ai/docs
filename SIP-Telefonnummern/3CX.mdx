@@ -12,7 +12,7 @@ description: "Wie du deine 3CX Anlage mit Fonio verbindest"
 
 ### Erstelle einen Trunk in 3CX
 
-Navigiere über die Admin Oberfläche zu dem Menüpunkt "Trunks & Chat" und erstelle dort über den +Trunk Button einen neuen Trunk.
+Navigiere über die Admin Oberfläche zu dem Menüpunkt "Trunks & Chat" und erstelle dort über den \+Trunk Button einen neuen Trunk.
 
 ![CleanShot 2025-08-18 at 11.36.27.png](/images/CleanShot2025-08-18at11.36.27.png)
 
@@ -38,6 +38,15 @@ Wenn fonio hinter einer 3CX-Telefonanlage verwendet wird, kann es vorkommen, das
 Um dies zu vermeiden, müssen im **SIP-Trunk** die Felder **„From: Display-Name“** sowie **„Remote-Party-ID“** auf `OriginatorCallerID` gesetzt werden. Diese Einstellung ist in 3CX standardmäßig nicht aktiv und sollte daher manuell angepasst werden.
 
 ![Clean Shot2025 12 12at18 34 17@2x Pn](/images/CleanShot2025-12-12at18.34.17@2x.png)
+
+<Note>
+  Aktiviere "Allow carrier-side transfers (SIP REFER)"
+
+  SIP Ranges zur White Liste hinzufügen: 
+
+  - `143.223.88.0/21`
+  - `161.115.160.0/19`
+</Note>
 
 ### Fonio Nummer Erstellung
 
