@@ -18,7 +18,8 @@
               "pages": [
                 "Introduction/Introduction",
                 "Introduction/fonio-Quickstart",
-                "Introduction/onboarding-academy"
+                "Introduction/onboarding-academy",
+                "Introduction/fonio-help-center"
               ]
             },
             {
@@ -79,8 +80,8 @@
               "group": "Telefonnummern",
               "pages": [
                 "Telefonnummern/Telefonnummern",
-                "Telefonnummern/Telefonnummern-copied-1",
-                "Telefonnummern/IndividuelleTelefonnummern"
+                "Telefonnummern/Telefonnummern-fonio",
+                "Telefonnummern/Nummer-Importieren"
               ]
             },
             {
