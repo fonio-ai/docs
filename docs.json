@@ -40,7 +40,7 @@
                 },
                 "anrufe-weiterleiten",
                 "Nachverarbeitung/EmailVersenden",
-                "Nachverarbeitung/WhatsApp",
+                "WhatsApp",
                 "Nachverarbeitung/SMSVersenden",
                 {
                   "group": "Terminbuchung",
